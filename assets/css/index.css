@@ -1,0 +1,15 @@
+.input-group {
+    left: 50%;
+    z-index: 99;
+    position: fixed;
+    display: flex;
+    transform: translate(-35%, 50%);
+    width: 30%;
+}
+.input-group form {
+    display: flex;
+    gap: 1em;
+}
+.search {
+    width: 30em;
+}
