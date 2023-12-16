@@ -27,8 +27,8 @@
                   <p class="text-center">Your Social Campaigns</p>
                   <form method="post" enctype="multipart/form-data">
                     <div class="mb-3">
-                      <label for="name" class="form-label">Name</label>
-                      <input value="<?= isset($_POST['name']) ? $_POST['name'] : '';?>" placeholder="name" type="text" name="name" class="form-control" id="name" aria-describedby="textHelp">
+                      <label for="name1" class="form-label">Name</label>
+                      <input value="<?= isset($_POST['name']) ? $_POST['name'] : '';?>" placeholder="name" type="text" name="name" class="form-control" id="name1" aria-describedby="textHelp">
                       <span><?= isset($Errors['name']) ? $Errors['name'] : '' ?></span>
                     </div>
                     <div class="mb-3">
@@ -37,8 +37,8 @@
                       <span><?= isset($Errors['surname']) ? $Errors['surname'] : '' ?></span>
                     </div>
                     <div class="mb-3">
-                      <label for="email" class="form-label">Email Address</label>
-                      <input value="<?= isset($_POST['email']) ? $_POST['email'] : '';?>" placeholder="email" type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp">
+                      <label for="mail" class="form-label">Email Address</label>
+                      <input value="<?= isset($_POST['email']) ? $_POST['email'] : '';?>" placeholder="email" type="email" name="email" class="form-control" id="mail" aria-describedby="emailHelp">
                         <span><?= isset($Errors['email']) ? $Errors['email'] : '' ?></span>
                     </div>
                     <div class="mb-4">
@@ -48,7 +48,7 @@
                     </div>
                     <div class="mb-3">
                       <div class="form-label">
-                        <label>Gender</label>
+                        <label for="male">Gender</label>
                     </div>
                       <label class="form-label me-2" for="male">Male</label>
                       <input class="me-4" id="male" type="radio" name="gender" value="male" aria-describedby="textHelp" checked>
@@ -66,8 +66,8 @@
                       <span><?= isset($Errors['file']) ? $Errors['file'] : '' ?></span>
                     </div>
                     <div class="mb-3">
-                      <label for="password" class="form-label">Password</label>
-                      <input id="password" type="password" name="password" class="form-control" aria-describedby="textHelp">
+                      <label for="pwd" class="form-label">Password</label>
+                      <input name="password" type="password" class="form-control" id="pwd">
                       <span><?= isset($Errors['password']) ? $Errors['password'] : '' ?></span>
                     </div>
                     <div class="mb-3">

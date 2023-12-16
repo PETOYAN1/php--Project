@@ -2,7 +2,7 @@
     include '../db_connect.php';
     
     $id = $_GET['id'];
-    $sql = "SELECT * FROM `adminpanel` WHERE ID = $id LIMIT 1";
+    $sql = "SELECT * FROM `admin` WHERE ID = $id LIMIT 1";
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
 
@@ -12,11 +12,11 @@
         $email = $_POST['email']; 
         $gender = $_POST['gender']; 
         $phone = $_POST['phone'];
-        $password = $_POST['password'];
+        $password = md5($_POST['password']);
         $dob = $_POST['dob'];
 
-        $sql = "UPDATE `adminpanel` SET `name`='$name',`surname`='$surname',`email`=
-        '$email',`DateofBirth` = '$dob',`phone` = '$phone',`gender`='$gender', `password` = '$password' WHERE ID = $id";
+        $sql = "UPDATE `admin` SET `name`='$name',`surname`='$surname',`email`=
+        '$email',`dob` = '$dob',`phone` = '$phone',`gender`='$gender', `password` = '$password' WHERE ID = $id";
 
         $result = mysqli_query($conn, $sql);
 
@@ -138,7 +138,7 @@
                   <div class="row mb-3">
                     <div class="col">
                       <label for="dob" class="form-label">Date of Birth</label>
-                      <input value="<?= $row['DateofBirth']?>" type="date" class="form-control" name="dob" id="dob">
+                      <input value="<?= $row['dob']?>" type="date" class="form-control" name="dob" id="dob">
                     </div>
                   </div>
                 <div class="row mb-3">

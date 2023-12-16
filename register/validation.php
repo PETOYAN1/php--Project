@@ -49,24 +49,25 @@
         $dob = htmlspecialchars($_POST['dob']);
         $phone = $_POST['phone'];
         $gender = $_POST['gender'];
-        $password = $_POST['password'];
         $photo = time() . '.jpg';
 
         // If not Error Connecting MySQL
 
         if(!$Errors) {
             include 'db_connect.php';
-
             if(!$conn) {
                 die('Failed Database' . mysqli_connect_error());
             } else {
-                $sql = "INSERT INTO `adminpanel` (`ID`, `name`, `surname`, `email`, `DateofBirth`, `gender`, `phone`, `image`, `password`, `dateRegister`) VALUES (NULL, '$name', '$surname', '$email', '$dob', '$gender', '$phone', '$photo', '$password', CURRENT_TIMESTAMP);";
-                $result = mysqli_query($conn, $sql);
-                if($result) {
-                    header("Location: ../index.php");
-                } else {
-                    echo 'Failed ' . mysqli_error($conn);
-                }
+                $password = md5($_POST['password']);
+                $sql = "INSERT INTO `admin` (`ID`, `name`, `surname`, `email`, `dob`, `gender`, `password`, 
+                `phone`, `image`, `dateRegister`) VALUES (NULL, '$name', '$surname', '$email', '$dob', '$gender', 
+                '$password', '$phone', '$photo', CURRENT_TIMESTAMP)";
+                    $result = mysqli_query($conn, $sql);
+                    if($result) {
+                        header("Location: login.php");
+                    } else {
+                        echo 'Failed ' . mysqli_error($conn);
+                    }
             }
         }
     } 
