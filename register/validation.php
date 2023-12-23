@@ -34,26 +34,45 @@
         if($_POST['passwordRep'] !== $_POST['password']) {
             $Errors['passMatch'] = 'passwords do not match'; 
         }
-        if($_FILES['file']['error'] == 0) {
-            $filename = $_FILES['file']['name'];
-            $tmp_name = $_FILES['file']['tmp_name'];
-            $location = '../files/';
-            move_uploaded_file($tmp_name, "$location" . time() . '.jpg');
-        } else {
-            $Errors['file'] = 'file not found';
+
+        // Validation file
+
+        $target_dir = "../files/";
+        $target_file = $target_dir . basename($_FILES["file"]["name"]);
+        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION ));
+
+    
+        $check = getimagesize($_FILES["file"]["tmp_name"]);
+
+        if($check === false) {
+            $Errors['file'] =  "File is not an image.";
+        } 
+        if (file_exists($target_file)) {
+            $Errors['file'] =  "Sorry, file already exists.";
         }
+        if ($_FILES["file"]["size"] > 500000) {
+            $Errors['file'] =  "Sorry, your file is too large.";
+        }
+        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+        && $imageFileType != "gif" ) {
+            $Errors['file'] =  "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+        }
+        
+        // Get Special character
 
         $name = htmlspecialchars($_POST['name']);
         $surname = htmlspecialchars($_POST['surname']);
         $email = htmlspecialchars($_POST['email']);
         $dob = htmlspecialchars($_POST['dob']);
-        $phone = $_POST['phone'];
+        $phone = htmlspecialchars($_POST['phone']);
         $gender = $_POST['gender'];
-        $photo = time() . '.jpg';
 
         // If not Error Connecting MySQL
 
         if(!$Errors) {
+            if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
+                $photo = htmlspecialchars(basename( $_FILES["file"]["name"]));
+            } 
             include 'db_connect.php';
             if(!$conn) {
                 die('Failed Database' . mysqli_connect_error());

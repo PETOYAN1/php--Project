@@ -13,3 +13,35 @@
 .search {
     width: 30em;
 }
+.left-sidebar {
+    width: 221px;
+}
+.body-wrapper {
+    margin-left: 200px;
+}
+.table-responsive {
+    width: 100%;
+    overflow: hidden;
+}
+.row {
+    width: 105%;
+}
+@media only screen and (min-width: 1366px) {
+    .table-responsive {
+        width: 84em;
+    }
+  }
+@media only screen and (max-width: 1366px) {
+    .left-sidebar {
+        display: none;
+    }
+    .body-wrapper {
+        margin: 0 auto !important;
+    }
+    .input-group {
+        left: 40%;
+    }
+    .app-header {
+        width: 100% !important;
+    }
+  }
