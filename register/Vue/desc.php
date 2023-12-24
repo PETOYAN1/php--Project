@@ -1,8 +1,6 @@
 <?php
     echo "<a href='index.php?order=asc' class='btn text-muted position-relative text-primary text-decoration-none'>˄</a>
     <a href='index.php?order=desc' class='btn text-success text-decoration-none'>˅</a>";
-    $sql = "SELECT * FROM admin ORDER BY ID DESC";
-    $result = mysqli_query($conn, $sql);
      while($row = mysqli_fetch_assoc($result)) {
         ?>
              <tr>
@@ -37,5 +35,5 @@
             </td>
           <?php
         }
-        include_once "register/Vue/pagination.php";
+        include "register/Vue/pagination.php";
 ?>

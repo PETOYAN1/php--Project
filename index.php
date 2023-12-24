@@ -8,15 +8,20 @@
     $page = 1;
   }
   $start_from = ($page - 1) * 05;
-  $sql = "SELECT * FROM `admin` LIMIT $start_from, $num_per_page";
+  $sql = "SELECT * FROM `admin` ORDER BY `ID` DESC LIMIT $start_from, $num_per_page";
   $result = mysqli_query($conn, $sql);
-  
+
   if($result->num_rows == 0) {
     header('Location: register/login.php');
     session_destroy();
   }
   if(!isset($_SESSION['ID'])) {
     header('location: register/login.php');
+  } else {
+      $id = $_SESSION['ID'];
+      $sql_for_img = "SELECT image FROM `admin` WHERE `ID` = $id";
+      $img_result = mysqli_query($conn,$sql_for_img);
+      $img = mysqli_fetch_array($img_result);
   }
 ?>
 <!doctype html>
@@ -107,7 +112,7 @@
               <li class="nav-item dropdown">
                 <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
                   aria-expanded="false">
-                  <img src="files/<?php echo $_SESSION['image'];?>" alt="" width="35" height="35" class="rounded-circle">
+                  <img src="files/<?php echo $img[0]?>" alt="" width="35" height="35" class="rounded-circle">
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
                   <div class="message-body">
